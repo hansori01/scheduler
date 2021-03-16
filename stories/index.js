@@ -42,7 +42,7 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
   ));
 
 
-  //DayList stories
+//DayList stories
 const days = [
   {
     id: 1,
@@ -105,7 +105,7 @@ storiesOf("InterviewerListItem", module)
       id={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
-      setInterviewer={action("setInterviewer")}
+      setInterviewer={event => action("setInterviewer")(interviewer.id)}
     />
   ));
 
@@ -121,7 +121,7 @@ const interviewers = [
 
 storiesOf("InterviewerList", module)
   .addParameters({
-    backgrounds: [{ name : "dark", value: "#222f3e", default: true }]
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
   .add("Initial", () => (
     <InterviewerList

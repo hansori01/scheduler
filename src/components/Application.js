@@ -23,9 +23,10 @@ const days = [
 ];
 
 
-export default function Application(props) {
+export default function Application() {
 
   const [day, setDay] = useState('Monday');
+  const [interviewer, setInterviewer] = useState('Monday');
 
   return (
     <main className="layout">

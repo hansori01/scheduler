@@ -26,7 +26,6 @@ const days = [
 export default function Application() {
 
   const [day, setDay] = useState('Monday');
-  const [interviewer, setInterviewer] = useState('');
 
   return (
     <main className="layout">

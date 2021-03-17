@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Show from './Show'
-
 import './style.scss';
 
 

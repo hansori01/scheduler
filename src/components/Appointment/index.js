@@ -1,9 +1,13 @@
 import React from 'react';
+
+import Show from './Show'
+
 import './style.scss';
 
 
 export default function Appointment(props) {
   return (
-    <article className="appointment">helo</article>
+    <article className="appointment">
+    </article>
   )
 };

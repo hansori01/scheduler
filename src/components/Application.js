@@ -3,77 +3,31 @@ import axios from 'axios';
 
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
+import getAppointmentsForDay from "../helpers/selectors";
 
 import "components/Application.scss";
-
-// const appointmentsArray = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 3,
-//     time: "2pm",
-//   },
-//   {
-//     id: 4,
-//     time: "3pm",
-//     interview: {
-//       student: "Sori Han",
-//       interviewer: {
-//         id: 2,
-//         name: "Mrs. Teacher",
-//         avatar: "https://i.imgur.com/twYrpay.jpg",
-//       }
-//     }
-//   }, {
-//     id: 5,
-//     time: "4pm",
-//   },
-//   {
-//     id: 6,
-//     time: "5pm",
-//   },
-// ];
 
 
 export default function Application() {
 
-  // const [days, setDays] = useState([]);
-  // const [day, setDay] = useState('Monday');
-  // const [appointments, setAppointments] = useState({})
-
-  //the ^^ line is refactored into a useState object
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {}
-  })
+  });
 
-  const dailyAppointments = [];
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const appointments = dailyAppointments.map(appointment => {
     return <Appointment key={appointment.id} {...appointment} />
-  })
+  });
 
 
   //new functions to update day or days in useState object
   const setDay = day => setState({ ...state, day }); //updates day key
   // const setDays = days => setState({ ...state, days }); //updates days key
 
-  
+
   useEffect(() => {
     //proxy added to package.json to avoid CORS error
 
@@ -84,7 +38,7 @@ export default function Application() {
       const days = all[0].data
       const appointments = all[1].data
 
-      setState(prev => ({...prev, days, appointments}))
+      setState(prev => ({ ...prev, days, appointments }))
     })
   }, []);
 

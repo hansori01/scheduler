@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import InterviewerList from '../InterviewerList'
-import Button from '../Button'
+import InterviewerList from '../InterviewerList';
+import Button from '../Button';
 
 export default function Form(props) {
 
@@ -16,7 +16,7 @@ export default function Form(props) {
   const cancel = () => {
     reset();
     props.onCancel();
-  }
+  };
 
   return (
 
@@ -47,5 +47,5 @@ export default function Form(props) {
 
 
 
-  )
-};
+  );
+}

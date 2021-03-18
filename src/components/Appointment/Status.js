@@ -12,5 +12,5 @@ export default function Status(props) {
       <h1 className="text--semi-bold">{props.message}</h1>
     </main>
 
-  )
-};
+  );
+}

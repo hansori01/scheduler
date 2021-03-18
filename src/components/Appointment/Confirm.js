@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../Button'
+import Button from '../Button';
 
 export default function Confirm(props) {
   return (
@@ -11,5 +11,5 @@ export default function Confirm(props) {
         <Button danger onClick={props.onConfirm}>Confirm</Button>
       </section>
     </main>
-  )
-};
+  );
+}

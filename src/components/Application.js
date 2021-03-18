@@ -19,7 +19,7 @@ export default function Application() {
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const appointments = dailyAppointments.map(appointment => {
-    return <Appointment key={appointment.id} {...appointment} />
+    return <Appointment key={appointment.id} {...appointment} />;
   });
 
 
@@ -35,11 +35,11 @@ export default function Application() {
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments')
     ]).then(all => {
-      const days = all[0].data
-      const appointments = all[1].data
+      const days = all[0].data;
+      const appointments = all[1].data;
 
-      setState(prev => ({ ...prev, days, appointments }))
-    })
+      setState(prev => ({ ...prev, days, appointments }));
+    });
   }, []);
 
 
@@ -74,4 +74,4 @@ export default function Application() {
       </section>
     </main>
   );
-};
+}

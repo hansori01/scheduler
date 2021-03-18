@@ -1,5 +1,5 @@
 
-export default function getAppointmentsForDay(state, day) {
+export const getAppointmentsForDay = (state, day) => {
   const [filteredDay] = state.days.filter(days => days.name === day);
 
   if (!filteredDay || !state.days.length === 0) return [];
@@ -9,3 +9,17 @@ export default function getAppointmentsForDay(state, day) {
 
   return appointmentDetails;
 };
+
+
+export const getInterview = (state, interview) => {
+if(!interview) return null;
+  
+const interviewerNumber = interview.interviewer
+const student = interview.student
+const interviewerList = {...state.interviewers}
+const interviewer = interviewerList[interviewerNumber]
+
+// console.log(state.interviewers)
+return {student, interviewer}
+};
+

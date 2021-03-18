@@ -48,9 +48,6 @@ import "components/Application.scss";
 //   },
 // ];
 
-const appointments = appointmentsArray.map(appointment => {
-  return <Appointment key={appointment.id} {...appointment} />
-})
 
 export default function Application() {
 
@@ -65,19 +62,31 @@ export default function Application() {
     appointments: {}
   })
 
+  const dailyAppointments = [];
+
+  const appointments = dailyAppointments.map(appointment => {
+    return <Appointment key={appointment.id} {...appointment} />
+  })
+
+
   //new functions to update day or days in useState object
   const setDay = day => setState({ ...state, day }); //updates day key
-  const setDays = days => setState({ ...state, days }); //updates days key
+  // const setDays = days => setState({ ...state, days }); //updates days key
 
-
-
+  
   useEffect(() => {
     //proxy added to package.json to avoid CORS error
-    axios.get('http://localhost:8001/api/days').then(response => {
-      // console.log(response.data)
-      setDays(response.data)
-    });
-  }, []); //empty dependency as we only want this run at the top of the render
+
+    Promise.all([
+      axios.get('http://localhost:8001/api/days'),
+      axios.get('http://localhost:8001/api/appointments')
+    ]).then(all => {
+      const days = all[0].data
+      const appointments = all[1].data
+
+      setState(prev => ({...prev, days, appointments}))
+    })
+  }, []);
 
 
   return (

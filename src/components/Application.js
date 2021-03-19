@@ -10,7 +10,7 @@ import "components/Application.scss";
 
 
 export default function Application() {
-
+// state of the picked day
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -18,9 +18,25 @@ export default function Application() {
     interviewers: {}
   });
 
+  // booking interview appointment
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
+  // saving interview appointment
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+  }
+
+
+  //selector functions for rendering appointments
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewerForDay = getInterviewersForDay(state, state.day)
 
+  //rendering the appointments for picked day
   const appointments = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview)
     // if(appointment.interview) console.log('appointment', appointment.interview.interviewer);
@@ -30,8 +46,14 @@ export default function Application() {
       time={appointment.time}
       interview={interview}
       interviewer={interviewerForDay}
+      bookInterview={bookInterview}
     />;
   });
+
+  // log the appointments object from the rendering interation
+console.log('appointments OBJECT', appointments)
+
+
 
 
   //new functions to update day or days in useState object

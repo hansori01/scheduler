@@ -39,9 +39,9 @@ export default function Application() {
   // const setDays = days => setState({ ...state, days }); //updates days key
 
 
+  //proxy added to package.json to avoid CORS error
   useEffect(() => {
-    //proxy added to package.json to avoid CORS error
-
+    //axios receives data in arrays using promise all
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments'),
@@ -59,24 +59,12 @@ export default function Application() {
     <main className="layout">
       <section className="sidebar">
         {/* sidebar */}
-        <img
-          className="sidebar--centered"
-          src="images/logo.png"
-          alt="Interview Scheduler"
-        />
+        <img className="sidebar--centered" src="images/logo.png" alt="Interview Scheduler" />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            days={state.days}
-            day={state.day}
-            setDay={setDay}
-          />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
-        <img
-          className="sidebar__lhl sidebar--centered"
-          src="images/lhl.png"
-          alt="Lighthouse Labs"
-        />
+        <img className="sidebar__lhl sidebar--centered" src="images/lhl.png" alt="Lighthouse Labs" />
         {/* sidebar */}
       </section>
       <section className="schedule">

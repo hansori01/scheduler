@@ -4,8 +4,10 @@ import axios from 'axios';
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
 import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import useVisualMode from "hooks/useVisualMode";
 
 import "components/Application.scss";
+
 
 
 export default function Application() {

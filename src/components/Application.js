@@ -10,28 +10,29 @@ import "components/Application.scss";
 
 
 export default function Application() {
-// state of the picked day
+  // state of the picked day
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {},
+    bookInterview: { bookInterview }
   });
 
   // booking interview appointment
   function bookInterview(id, interview) {
-    console.log(id, interview);
-  }
 
-  // saving interview appointment
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
-  }
+    //new appointment obj with current state of appointment at id, and interviewer/student details
+    const appointment = { ...state.appointments[id], interview: { ...interview } };
+    const appointments = { ...state.appointments, [id]: appointment };
+
+    console.log(appointments)
+    setState({ ...state, appointments })
+  };
 
 
+
+  const setDay = day => setState({ ...state, day }); //updates day key
   //selector functions for rendering appointments
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewerForDay = getInterviewersForDay(state, state.day)
@@ -49,17 +50,6 @@ export default function Application() {
       bookInterview={bookInterview}
     />;
   });
-
-  // log the appointments object from the rendering interation
-console.log('appointments OBJECT', appointments)
-
-
-
-
-  //new functions to update day or days in useState object
-  const setDay = day => setState({ ...state, day }); //updates day key
-  // const setDays = days => setState({ ...state, days }); //updates days key
-
 
   //proxy added to package.json to avoid CORS error
   useEffect(() => {

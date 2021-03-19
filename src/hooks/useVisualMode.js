@@ -5,10 +5,10 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-//takes a new mode and sets mode, and updates history
+  //takes a new mode and sets mode, and updates history
   const transition = function (newMode, replace = false) {
     //if user hits cancel or receives error, go back to initial state
-    if (replace){
+    if (replace) {
       history.pop();
       setMode(initial)
     }
@@ -22,9 +22,13 @@ export default function useVisualMode(initial) {
     if (history.length < 2) {
       return;
     };
-    history.pop();
-    setMode(history[history.length - 1]);
-    };
+    setHistory(prev => {
+      const newHistory = [...prev];
+      newHistory.pop();
+      setMode(newHistory.slice(-1)[0]);
+      return newHistory;
+    })
+  };
 
   return { mode, transition, back };
 };

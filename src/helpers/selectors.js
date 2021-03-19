@@ -21,3 +21,14 @@ const interviewer = interviewerList[interviewerNumber]
 
 return {student, interviewer}
 };
+
+export const getInterviewersForDay = (state, day) => {
+  const [filteredDay] = state.days.filter(days => days.name === day);
+
+  if (!filteredDay || !state.days.length === 0) return [];
+
+  const interviewers = filteredDay.interviewers;
+  const interviewerDetails = interviewers.map(element => state.interviewers[element]);
+
+  return interviewerDetails;
+};

@@ -22,7 +22,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  
+
   // saving interview appointment
   function save(name, interviewer) {
     // transition(SAVING)
@@ -31,10 +31,9 @@ export default function Appointment(props) {
       interviewer
     };
     console.log('save details', interviewer, interview);
-     props.bookInterview(interviewer, interview);
-     props.bookInterview(props.id, interview);
-     transition(SHOW);
-    //  .then(() => transition(SHOW));
+
+    props.bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
   };
 
 
@@ -42,7 +41,7 @@ export default function Appointment(props) {
     <article className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      { mode === SHOW &&(
+      { mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}

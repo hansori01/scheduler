@@ -19,7 +19,5 @@ const student = interview.student
 const interviewerList = {...state.interviewers}
 const interviewer = interviewerList[interviewerNumber]
 
-// console.log(state.interviewers)
 return {student, interviewer}
 };
-

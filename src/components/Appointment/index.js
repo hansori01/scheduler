@@ -3,12 +3,12 @@ import React from 'react';
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
-import useVisualMode from 'hooks/useVisualMode'
 import Form from './Form';
 import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
 
+import useVisualMode from 'hooks/useVisualMode'
 import './style.scss';
 
 
@@ -44,17 +44,17 @@ export default function Appointment(props) {
 
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(err => transition(ERROR_SAVE))
+      .catch(err => transition(ERROR_SAVE, true)) //we replace mode rather than adding to it
   };
 
   //deleting appointment
   function deleteAppointment() {
-    transition(DELETING);
+    transition(DELETING, true);
     console.log(props.id);
     props.onDelete(props.id)
       .then(res => transition(EMPTY))
-      .catch(err => transition(ERROR_DELETE))
-
+      .catch(err => transition(ERROR_DELETE, true))
+//above replace boolean lets us bypass and double-back to show mode and skip confirm mode
   }
 
 

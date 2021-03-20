@@ -28,22 +28,12 @@ export default function Application() {
       .then(res => { setState({ ...state, appointments }) });
   };
 
-
-  //make cancel function
-  //if appointment[id].interview exists
-  // change appointment[id].interview to null
   function onDelete(id) {
     const appointment = { ...state.appointments[id], interview: null };
     const appointments = { ...state.appointments, [id]: appointment };
     console.log(id)
     return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
-      .then(res => {
-        console.log('axios', res)
-        setState({
-          ...state,
-          appointments
-        });
-      });
+      .then(res => setState({ ...state, appointments }));
   };
 
   const setDay = day => setState({ ...state, day }); //updates day key

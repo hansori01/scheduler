@@ -16,25 +16,35 @@ export default function Application() {
     days: [],
     appointments: {},
     interviewers: {},
-    bookInterview: { bookInterview }
+    // bookInterview: { bookInterview }
   });
 
   // booking interview appointment
   function bookInterview(id, interview) {
-
     //new appointment obj with current state of appointment at id, and interviewer/student details
     const appointment = { ...state.appointments[id], interview: { ...interview } };
     const appointments = { ...state.appointments, [id]: appointment };
-
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then(res => {setState({ ...state, appointments })});
-
-
-
-
+      .then(res => { setState({ ...state, appointments }) });
   };
 
 
+  //make cancel function
+  //if appointment[id].interview exists
+  // change appointment[id].interview to null
+  function onDelete(id) {
+    const appointment = { ...state.appointments[id], interview: null };
+    const appointments = { ...state.appointments, [id]: appointment };
+    console.log(id)
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(res => {
+        console.log('axios', res)
+        setState({
+          ...state,
+          appointments
+        });
+      });
+  };
 
   const setDay = day => setState({ ...state, day }); //updates day key
   //selector functions for rendering appointments
@@ -52,6 +62,7 @@ export default function Application() {
       interview={interview}
       interviewer={interviewerForDay}
       bookInterview={bookInterview}
+      onDelete={onDelete}
     />;
   });
 

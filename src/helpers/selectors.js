@@ -22,6 +22,7 @@ export const getInterview = (state, interview) => {
   return { student, interviewer }
 };
 
+
 export const getInterviewersForDay = (state, day) => {
   const [filteredDay] = state.days.filter(days => days.name === day);
 

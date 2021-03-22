@@ -27,7 +27,6 @@ export default function useApplicationData() {
   };
 
 
-
   // booking interview appointment
   function bookInterview(id, interview) {
     //new appointment obj with current state of appointment at id, and interviewer/student details
@@ -52,11 +51,10 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day }); //updates day key
 
 
-
-
   //proxy added to package.json to avoid CORS error
+
+  //fetch and update appointment / days data 
   useEffect(() => {
-    //axios receives data in arrays using promise all
     Promise.all([
       axios.get('http://localhost:8001/api/days'),
       axios.get('http://localhost:8001/api/appointments'),
@@ -67,11 +65,8 @@ export default function useApplicationData() {
       const interviewers = all[2].data;
       setState(prev => ({ ...prev, days, appointments, interviewers }));
     });
-  }, []);
+  }, []);//run useEffect on top of rendering
 
   return { state, setDay, bookInterview, onDelete };
 
 }
-
-
-//find number of avail spots

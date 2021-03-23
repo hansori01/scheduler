@@ -1,5 +1,4 @@
-//fixture is a reusable static data imported or embedded into a test file.
-//data should be complete but not excessive.
+//representation of the data within database but does not encompass the full data.
 const fixtures = {
   days: [
     {
@@ -58,25 +57,29 @@ const fixtures = {
 export default {
   get: jest.fn(url => {
     if (url === "/api/days") {
-      return Promise.resolved({
+      return Promise.resolve({
         status: 200,
         statusText: "OK",
         data: fixtures.days
       });
     }
+
     if (url === "/api/appointments") {
-      return Promise.resolved({
+      /* Resolve appointments data */
+      return Promise.resolve({
         status: 200,
         statusText: "OK",
         data: fixtures.appointments
       });
     }
+
     if (url === "/api/interviewers") {
-      return Promise.resolved({
+      /* Resolve interviewers data */
+      return Promise.resolve({
         status: 200,
         statusText: "OK",
         data: fixtures.interviewers
       });
     }
   })
-};
+}

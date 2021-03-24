@@ -8,6 +8,8 @@ import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
 
+// import { updateSpot } from 'hooks/useApplicationData'
+
 import useVisualMode from 'hooks/useVisualMode'
 import './style.scss';
 
@@ -32,10 +34,18 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+ 
   const deleteConfirm = 'Are you sure you want to delete?'
 
   // saving interview appointment
   function save(name, interviewer) {
+
+    let edit;
+    //if mode is at EDIT, updateSpot does not change value of spots
+    if (mode === 'EDIT') {
+      edit = true;
+    }
+
     transition(SAVING);
     const interview = {
       student: name,
@@ -43,7 +53,7 @@ export default function Appointment(props) {
     };
     console.log('save details', interviewer, interview);
 
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, edit)
       .then(() => transition(SHOW))
       .catch(err => transition(ERROR_SAVE, true)) //we replace mode rather than adding to it
   };

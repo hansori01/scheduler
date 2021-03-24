@@ -14,7 +14,7 @@ export default function useApplicationData() {
   });
 
 
-// update Spot of the day in state as interview is saved or deleted
+  // update Spot of the day in state as interview is saved or deleted
   function updateSpot(value) {
     const currentDay = state.days.find(day => day.name === state.day)
     const copyOfDays = [...state.days];
@@ -22,17 +22,22 @@ export default function useApplicationData() {
     copyOfDays.forEach(day => {
       if (day.id === currentDay.id) day.spots += value
     });
- 
+
     return copyOfDays;
   };
 
 
   // booking interview appointment
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, edit) {
     //new appointment obj with current state of appointment at id, and interviewer/student details
     const appointment = { ...state.appointments[id], interview: { ...interview } };
     const appointments = { ...state.appointments, [id]: appointment };
-    const days = updateSpot(-1)
+    let days;
+    if (!edit) {
+      days = updateSpot(-1);
+    } else {
+      days = updateSpot(0);
+    }
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(res => { setState({ ...state, appointments, days }) });

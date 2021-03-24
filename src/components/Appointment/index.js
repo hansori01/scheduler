@@ -25,6 +25,7 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
 
+
   const interviewers = props.interviewer
 
   const { mode, transition, back } = useVisualMode(
@@ -54,12 +55,13 @@ export default function Appointment(props) {
     props.onDelete(props.id)
       .then(res => transition(EMPTY))
       .catch(err => transition(ERROR_DELETE, true))
-//above replace boolean lets us bypass and double-back to show mode and skip confirm mode
+    //above replace boolean lets us bypass and double-back to show mode and skip confirm mode
   }
 
 
   return (
-    <article className="appointment">
+    //TODO any HTML element prefixed with 'data-' is accessible through the browser API using document.querySelector("[data-testid=appointment]")
+    <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SAVING && <Status message={'Saving...'} />}
@@ -83,13 +85,16 @@ export default function Appointment(props) {
         />
       )}
       {mode === EDIT && (
-        <Form
-          interviewers={interviewers}
-          onCancel={back}
-          onSave={save}
-          name={props.interview.student}
-          interviewer={props.interview.interviewer.id}
-        />
+        <div>
+          <Form
+            interviewers={interviewers}
+            onCancel={back}
+            onSave={save}
+            name={props.interview.student}
+            interviewer={props.interview.interviewer.id}
+          />
+          {props.id}this is the id
+        </div>
       )}
     </article>
   );

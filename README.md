@@ -12,7 +12,7 @@ Back-End: Express, Node.js, PostgreSQL
 Testing: Storybook, Webpack Dev Server, Jest, Testing Library and Cypress
 
 Dependencies:
-!(https://github.com/hansori01/scheduler/blob/master/images/dependencies.png?raw=true)
+!["Dependency List"](https://github.com/hansori01/scheduler/blob/master/images/dependencies.png?raw=true)
 
 
 ### User can navigate and create new appointments.

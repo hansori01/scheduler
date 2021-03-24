@@ -1,6 +1,6 @@
 # Interview Scheduler
 
-Scheduler is a  SPA React application that allows users to book, edit and cancel interviews. This project was an introduction to React and Test Driven Development during my time at Lighthouse Lab's Full Stack program. Working with built in hooks and custom hooks was one of the highlights of this learning experience.
+Interview Scheduler is a SPA React application that allows users to book, edit and cancel interviews. This project focuses on React and Test Driven Development completed during my time at Lighthouse Lab's Full Stack program. Working with built in hooks, custom hooks and TDD were some of the highlights in this learning experience.
 
 
 ## Project Stack
@@ -15,10 +15,10 @@ Dependencies:\
 !["Dependency List"](https://github.com/hansori01/scheduler/blob/master/images/dependencies.png?raw=true)
 
 
-### User can navigate and create new appointments.
+### Navigate and create new appointments.
 !["User can navigate and create new appointments."](https://github.com/hansori01/scheduler/blob/master/images/scheduler1.gif?raw=true)
 
-### User can seamlessly edit and update your appointment.
+### Seamlessly edit and update your appointments.
 !["User can seamlessly edit and update your appointment."](https://github.com/hansori01/scheduler/blob/master/images/scheduler2.gif?raw=true)
 
 
@@ -32,4 +32,4 @@ Install dependencies with `npm install`.
 npm start
 ```
 
-Data is stored in a PostgreSQL database that can be found [here]('https://github.com/hansori01/scheduler-api'). To setup the api server, follow the instructions in the repository.
+Data is stored in a PostgreSQL database that can be found !["here"]('https://github.com/hansori01/scheduler-api'). To setup the api server, follow the instructions in the repository.

@@ -7,13 +7,23 @@ import Application from "components/Application";
 import { fireEvent } from "@testing-library/react/dist";
 
 //this allows us to used scoped queries
-import { getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
+import {
+  getByText,
+  prettyDOM,
+  getAllByTestId,
+  getByAltText,
+  getByPlaceholderText,
+  queryByText,
+  queryByAltText
+} from "@testing-library/react";
 
 
 afterEach(cleanup);
 
 
 describe("Application", () => {
+
+
 
   it("defaults to Monday and changes the schedule when a new day is selected", async () => {
     const { getByText } = render(<Application />);
@@ -27,6 +37,7 @@ describe("Application", () => {
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
 
   });
+
 
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
@@ -62,12 +73,14 @@ describe("Application", () => {
   });
 
 
+
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
 
     //debug and prettyDOM is used to log when debugging
     const { container } = render(<Application />);
     //wait for Archie Cohen to load
     await waitForElement(() => getByText(container, "Archie Cohen"));
+
     const appointment = getAllByTestId(container, "appointment").find(
       appointment => queryByText(appointment, "Archie Cohen")
     );
@@ -90,6 +103,8 @@ describe("Application", () => {
 
   });
 
+
+
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     const { container, debug } = render(<Application />);
 
@@ -102,6 +117,7 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Edit"));
 
     expect(getByText(appointment, 'Save')).toBeInTheDocument();
+
 
 
     fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
@@ -123,8 +139,67 @@ describe("Application", () => {
     // debug();
   });
 
-  
-  it("shows the save error when failing to save an appointment", () => {
+
+
+  it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
+
+    const { container, debug } = render(<Application />);
+
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    const [appointment] = getAllByTestId(container, "appointment");
+
+    fireEvent.click(getByAltText(appointment, "Add"));
+
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" },
+    });
+
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
+    fireEvent.click(getByText(appointment, "Save"));
+
+    expect(getByText(appointment, "Saving...")).toBeInTheDocument();
+
+    //check for Error message
+    await waitForElement(() => getByText(appointment, "Error"));
+
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
+
+
+
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
+
+    const { container, debug } = render(<Application />);
+    
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    
+    const appointment = getAllByTestId(container, "appointment").find(
+      appointment => queryByText(appointment, "Archie Cohen")
+      );
+      
+      fireEvent.click(queryByAltText(appointment, "Delete"));
+      
+      expect(getByText(appointment, "Are you sure you want to delete?")).toBeInTheDocument();
+      
+      fireEvent.click(getByText(appointment, "Confirm"));
+      
+      expect(getByText(appointment, "Deleting...")).toBeInTheDocument();
+      
+      await waitForElement(() => getByText(appointment, "Error"));
+      
+      debug()
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
+
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+  });
+
 })

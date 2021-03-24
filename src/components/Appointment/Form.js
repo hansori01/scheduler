@@ -25,6 +25,10 @@ export default function Form(props) {
       setError("Student name cannot be blank");
       return;
     }
+    if (!interviewer){
+      setError("You must choose an interviewer")
+      return;
+    }
     //since the error is set to state, reset the error to change the state
     setError("");
     props.onSave(name, interviewer)

@@ -11,7 +11,7 @@ Back-End: Express, Node.js, PostgreSQL
 
 Testing: Storybook, Webpack Dev Server, Jest, Testing Library and Cypress
 
-Dependencies:
+Dependencies:\
 !["Dependency List"](https://github.com/hansori01/scheduler/blob/master/images/dependencies.png?raw=true)
 
 
@@ -32,4 +32,4 @@ Install dependencies with `npm install`.
 npm start
 ```
 
-Data is stored in a PostgreSQL database that can be found here. To setup the api server, follow the instructions in the repo.
+Data is stored in a PostgreSQL database that can be found [here]('https://github.com/hansori01/scheduler-api'). To setup the api server, follow the instructions in the repository.

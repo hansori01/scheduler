@@ -5,17 +5,17 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-  //takes a new mode and sets mode, and updates history
   const transition = function (newMode, replace = false) {
+
     //if user hits cancel or receives error, go back to initial state
     if (replace) {
       history.pop();
-      setMode(initial)
+      setMode(initial);
     }
-    setMode(newMode)
+    setMode(newMode);
     let updatedHistory = [...history, newMode];
-    setHistory(updatedHistory)
-  }
+    setHistory(updatedHistory);
+  };
 
   // removes the latest element from history then sets Mode to last element in history
   const back = () => {
@@ -27,7 +27,7 @@ export default function useVisualMode(initial) {
       newHistory.pop();
       setMode(newHistory.slice(-1)[0]);
       return newHistory;
-    })
+    });
   };
 
   return { mode, transition, back };

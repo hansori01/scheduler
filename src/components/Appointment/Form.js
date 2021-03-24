@@ -25,20 +25,18 @@ export default function Form(props) {
       setError("Student name cannot be blank");
       return;
     }
-    if (!interviewer){
-      setError("You must choose an interviewer")
+    if (!interviewer) {
+      setError("You must choose an interviewer");
       return;
     }
-    //since the error is set to state, reset the error to change the state
+    //reset error state to revert to no error on save
     setError("");
-    props.onSave(name, interviewer)
-  }
+    props.onSave(name, interviewer);
+  };
 
   return (
-
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        {/* form has an auto-Enter submit so it must be disabled */}
         <form autoComplete="off" onSubmit={event => event.preventDefault()} >
           <input
             className="appointment__create-input text--semi-bold"
@@ -47,14 +45,11 @@ export default function Form(props) {
             placeholder="Enter Student Name"
             value={name}
             onChange={event => setName(event.target.value)}
-            data-testid="student-name-input"//JEST test id
+            data-testid="student-name-input"
           />
         </form>
         <section className="appointment__validation">{error}</section>
-        {/* Error message for blank student name */}
         <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
-
-
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
@@ -65,8 +60,5 @@ export default function Form(props) {
         </section>
       </section>
     </main >
-
-
-
   );
 }

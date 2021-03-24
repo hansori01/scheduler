@@ -1,4 +1,3 @@
-//representation of the data within database but does not encompass the full data.
 const fixtures = {
   days: [
     {
@@ -83,10 +82,10 @@ export default {
     }
   }),
   put: jest.fn(() => {
-      return Promise.resolve({
-        status: 204,
-        statusText: "No Content"
-      })
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
 
   }),
 
@@ -94,7 +93,7 @@ export default {
     return Promise.resolve({
       status: 204,
       statusText: "No Content"
-    })
+    });
 
-})
-}
+  })
+};

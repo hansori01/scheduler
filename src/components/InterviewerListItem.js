@@ -14,7 +14,6 @@ export default function InterviewerListItem(props) {
     <li
       className={InterviewerItemClass}
       onClick={props.setInterviewer}
-      // onClick={() => props.setInterviewer(props.name)}
     >
       <img
         className="interviewers__item-image"
@@ -23,5 +22,5 @@ export default function InterviewerListItem(props) {
       />
       {props.selected && props.name}
     </li>
-  )
+  );
 }

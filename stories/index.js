@@ -9,7 +9,6 @@ import DayListItem from "components/DayListItem";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 
-//Appointment Import
 import Appointment from "components/Appointment/index";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
@@ -22,7 +21,7 @@ import Form from "components/Appointment/Form";
 import "index.scss";
 
 
-//Button stories
+
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -39,20 +38,19 @@ storiesOf("Button", module)
     </Button>
   ));
 
-//DayListItem stories
-storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
+
+  storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-  }) // Provides the default background color for our component
-  .add("Unselected", () => <DayListItem name="Monday" spots={5} />) // To define our stories, we call add() once for each of our test states to generate a story
+  }) 
+  .add("Unselected", () => <DayListItem name="Monday" spots={5} />)
   .add("Selected", () => <DayListItem name="Monday" spots={5} selected />)
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
 
 
-//DayList stories
 const days = [
   {
     id: 1,
@@ -84,7 +82,6 @@ storiesOf("DayList", module)
 
 
 
-//InterviewerListItem stories
 const interviewer = {
   id: 1,
   name: "Sylvia Palmer",
@@ -120,8 +117,8 @@ storiesOf("InterviewerListItem", module)
   ));
 
 
-//InterviewerList Story
-const interviewers = [
+
+  const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
   { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
@@ -148,7 +145,6 @@ storiesOf("InterviewerList", module)
   ));
 
 
-//Appointment Stories
 
 storiesOf("Appointment", module)
   .addParameters({

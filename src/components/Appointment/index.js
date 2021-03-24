@@ -1,4 +1,5 @@
 import React from 'react';
+import useVisualMode from 'hooks/useVisualMode';
 
 import Header from './Header';
 import Show from './Show';
@@ -8,11 +9,7 @@ import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
 
-// import { updateSpot } from 'hooks/useApplicationData'
-
-import useVisualMode from 'hooks/useVisualMode'
 import './style.scss';
-
 
 //mode constants
 const EMPTY = "EMPTY";
@@ -25,26 +22,19 @@ const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
+
 export default function Appointment(props) {
 
-
-  const interviewers = props.interviewer
-
+  const interviewers = props.interviewer;
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+  const deleteConfirm = 'Are you sure you want to delete?';
 
- 
-  const deleteConfirm = 'Are you sure you want to delete?'
 
-  // saving interview appointment
   function save(name, interviewer) {
-
-    let edit;
-    //if mode is at EDIT, updateSpot does not change value of spots
-    if (mode === 'EDIT') {
-      edit = true;
-    }
+    let edit; //if mode is at EDIT, updateSpot does not change value of spots
+    if (mode === 'EDIT') edit = true;
 
     transition(SAVING);
     const interview = {
@@ -54,22 +44,19 @@ export default function Appointment(props) {
 
     props.bookInterview(props.id, interview, edit)
       .then(() => transition(SHOW))
-      .catch(err => transition(ERROR_SAVE, true)) //we replace mode rather than adding to it
-  };
+      .catch(err => transition(ERROR_SAVE, true));
+  }
 
-  //deleting appointment
   function deleteAppointment() {
     transition(DELETING, true);
-    console.log(props.id);
+
     props.onDelete(props.id)
       .then(res => transition(EMPTY))
-      .catch(err => transition(ERROR_DELETE, true))
-    //above replace boolean lets us bypass and double-back to show mode and skip confirm mode
+      .catch(err => transition(ERROR_DELETE, true));
   }
 
 
   return (
-    //TODO any HTML element prefixed with 'data-' is accessible through the browser API using document.querySelector("[data-testid=appointment]")
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
@@ -94,16 +81,13 @@ export default function Appointment(props) {
         />
       )}
       {mode === EDIT && (
-        <div>
-          <Form
-            interviewers={interviewers}
-            onCancel={back}
-            onSave={save}
-            name={props.interview.student}
-            interviewer={props.interview.interviewer.id}
-          />
-          {props.id}this is the id
-        </div>
+        <Form
+          interviewers={interviewers}
+          onCancel={back}
+          onSave={save}
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+        />
       )}
     </article>
   );

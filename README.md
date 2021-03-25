@@ -32,4 +32,4 @@ Install dependencies with `npm install`.
 npm start
 ```
 
-Data is stored in a PostgreSQL database that can be found !["here"]('https://github.com/hansori01/scheduler-api'). To setup the api server, follow the instructions in the repository.
+Data is stored in a PostgreSQL database that can be found ["here"]('https://github.com/hansori01/scheduler-api'). To setup the api server, follow the instructions in the repository.

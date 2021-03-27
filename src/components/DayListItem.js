@@ -11,6 +11,7 @@ export default function DayListItem(props) {
     "day-list__item--full": !props.spots,
   });
 
+  //TODO he thinks this could be refactored outside of function and no reliance on props
   function formatSpots() {
     if (props.spots > 1) {
       return props.spots + ' spots remaining';

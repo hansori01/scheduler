@@ -4,22 +4,11 @@ import classNames from 'classnames/bind';
 import 'components/DayListItem.scss';
 
 export default function DayListItem(props) {
-
   const DayListItemClass = classNames({
     "day-list__item": true,
     "day-list__item--selected": props.selected,
     "day-list__item--full": !props.spots,
   });
-
-  //TODO he thinks this could be refactored outside of function and no reliance on props
-  function formatSpots() {
-    if (props.spots > 1) {
-      return props.spots + ' spots remaining';
-    } else if (props.spots === 1) {
-      return props.spots + ' spot remaining';
-    }
-    return 'no spots remaining';
-  }
 
   return (
     <li
@@ -28,7 +17,7 @@ export default function DayListItem(props) {
       data-testid='day'
     >
       <h2 >{props.name}</h2>
-      <h3>{formatSpots()}</h3>
+      <h3>{props.formatSpots}</h3>
     </li>
   );
 }

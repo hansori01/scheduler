@@ -3,6 +3,15 @@ import classNames from 'classnames/bind';
 
 import 'components/DayListItem.scss';
 
+function formatSpots(spots) {
+  if (spots > 1) {
+    return spots + ' spots remaining';
+  } else if (spots === 1) {
+    return spots + ' spot remaining';
+  }
+  return 'no spots remaining';
+};
+
 export default function DayListItem(props) {
   const DayListItemClass = classNames({
     "day-list__item": true,
@@ -17,7 +26,7 @@ export default function DayListItem(props) {
       data-testid='day'
     >
       <h2 >{props.name}</h2>
-      <h3>{props.formatSpots}</h3>
+      <h3>{formatSpots(props.spots)}</h3>
     </li>
   );
 }

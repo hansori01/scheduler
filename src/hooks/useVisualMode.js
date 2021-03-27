@@ -8,13 +8,12 @@ export default function useVisualMode(initial) {
   const transition = function (newMode, replace = false) {
 
     //if user hits cancel or receives error, go back to initial state
-    if (replace) {
-      setHistory(prev => prev.pop())
-      setMode(initial);
-    }
     setMode(newMode);
-    let updatedHistory = [...history, newMode];
-    setHistory(updatedHistory);
+    if (replace) {
+      setHistory(prev => [...prev.slice(0, prev.length - 1), newMode])
+    } else {
+      setHistory(prev => [...prev, newMode])
+    };
   };
 
   // removes the latest element from history then sets Mode to last element in history
@@ -22,13 +21,8 @@ export default function useVisualMode(initial) {
     if (history.length < 2) {
       return;
     };
-    setHistory(prev => {
-      const newHistory = [...prev];
-      newHistory.pop();
-      setMode(newHistory.slice(-1)[0]);
-      return newHistory;
-    });
+    setMode(history[history.length - 2])
+    setHistory(prev => [...prev.slice(0, prev.length - 1)]);
   };
-
   return { mode, transition, back };
 };

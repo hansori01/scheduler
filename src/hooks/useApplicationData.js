@@ -15,12 +15,14 @@ export default function useApplicationData() {
   function updateSpot(value) {
     const currentDay = state.days.find(day => day.name === state.day);
     const copyOfDays = [...state.days];
-    copyOfDays.forEach(day => {
-      const copyOfDay = {...day}
-      if (copyOfDay.id === currentDay.id) copyOfDay.spots += value;
-    });
 
-    return copyOfDays;
+    const updatedSpotsDays = copyOfDays.map(day => {
+      if (day.id !== currentDay.id) {
+        return { ...day }
+      }
+      return { ...day, spots: day.spots += value };
+    });
+    return updatedSpotsDays;
   }
 
 

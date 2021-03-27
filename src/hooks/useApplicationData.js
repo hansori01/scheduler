@@ -16,7 +16,7 @@ export default function useApplicationData() {
     const currentDay = state.days.find(day => day.name === state.day);
     const copyOfDays = [...state.days];
     copyOfDays.forEach(day => {
-      const copyOfDay = {...day} //TODO is the nested spreading here correct?
+      const copyOfDay = {...day}
       if (copyOfDay.id === currentDay.id) copyOfDay.spots += value;
     });
 

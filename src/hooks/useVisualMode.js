@@ -9,7 +9,7 @@ export default function useVisualMode(initial) {
 
     //if user hits cancel or receives error, go back to initial state
     if (replace) {
-      setHistory(prev => prev.pop()) //TODO - i changed this logic. solved bug. is this enough?
+      setHistory(prev => prev.pop())
       setMode(initial);
     }
     setMode(newMode);

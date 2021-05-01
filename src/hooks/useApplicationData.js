@@ -117,5 +117,22 @@ export default function useApplicationData() {
     });
   }, []);
 
+  //setting up WebSocket
+  useEffect(() => {
+    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    // socket.onopen = () => {
+    //   socket.send('ping')
+    // }
+
+    // socket.onmessage = event => {
+    //   console.log(event.data);
+    // }
+
+// return exampleSocket.close();
+
+
+    //dispatch dependency
+  }, [dispatch]);
+
   return { state, setDay, bookInterview, onDelete };
 }

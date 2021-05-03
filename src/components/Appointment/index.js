@@ -37,7 +37,7 @@ export default function Appointment(props) {
       console.log('running useeffect ONE')
       transition(SHOW);
     }
-    if (props.interview === null && mode === SHOW) {
+    if (!props.interview && mode === SHOW) {
       console.log('running second if statement')
       transition(EMPTY);
     }

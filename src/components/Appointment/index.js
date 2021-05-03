@@ -38,7 +38,7 @@ export default function Appointment(props) {
       transition(SHOW);
     }
     if (props.interview === null && mode === SHOW) {
-      console.log('props.interview', props.interview)
+      console.log('running second if statement')
       transition(EMPTY);
     }
   }, [props.interview, transition, mode]);
@@ -63,7 +63,7 @@ export default function Appointment(props) {
     transition(DELETING, true);
 
     props.onDelete(props.id)
-      .then(res => transition(SHOW))
+      .then(res => transition(EMPTY))
       .catch(err => transition(ERROR_DELETE, true));
   }
 

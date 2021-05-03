@@ -85,9 +85,9 @@ export default function useApplicationData() {
 
     return axios
       .put(`/api/appointments/${id}`, { interview })
-      .then(res => {
-        dispatch({ type: SET_INTERVIEW, id, interview });
-      });
+      // .then(res => {
+      //   dispatch({ type: SET_INTERVIEW, id, interview });
+      // });
   };
 
 // handler for deleting interview and updating database
@@ -97,7 +97,7 @@ export default function useApplicationData() {
 
     return axios
       .delete(`/api/appointments/${id}`)
-      .then(res => dispatch({ type: SET_INTERVIEW, id, interview: null }))
+      // .then(res => dispatch({ type: SET_INTERVIEW, id, interview: null }))
   };
 
   //on rendering app, fetch and update the state from database
@@ -132,7 +132,7 @@ export default function useApplicationData() {
         
         const data = JSON.parse(event.data);
         
-        if (typeof data === "object" && data.type === "SET_INTERVIEW") {
+        if (data.type === "SET_INTERVIEW") {
           dispatch(data);
         }
       }

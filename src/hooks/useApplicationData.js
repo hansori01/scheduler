@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import axios from 'axios';
 
 const initialState = {
@@ -93,10 +93,10 @@ export default function useApplicationData() {
 // handler for deleting interview and updating database
   function onDelete(id) {
     updateSpot(+1)
-    const appointment = { ...state.appointments[id], interview: null };
+    // const appointment = { ...state.appointments[id], interview: null };
 
     return axios
-      .delete(`/api/appointments/${id}`, appointment)
+      .delete(`/api/appointments/${id}`)
       .then(res => dispatch({ type: SET_INTERVIEW, id, interview: null }))
   };
 
@@ -119,20 +119,29 @@ export default function useApplicationData() {
 
   //setting up WebSocket
   useEffect(() => {
+    
+    const cleanup = () => {
+      socket.close()
+    }
     const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-    // socket.onopen = () => {
-    //   socket.send('ping')
-    // }
+    socket.onopen = () => {
+      socket.send('ping')
+      
+      socket.onmessage = event => {
+        console.log('socket msg received', event.data);
+        
+        const data = JSON.parse(event.data);
+        
+        if (typeof data === "object" && data.type === "SET_INTERVIEW") {
+          dispatch(data);
+        }
+      }
+    }
 
-    // socket.onmessage = event => {
-    //   console.log(event.data);
-    // }
-
-// return exampleSocket.close();
-
+return cleanup;
 
     //dispatch dependency
-  }, [dispatch]);
+  }, []);
 
   return { state, setDay, bookInterview, onDelete };
 }

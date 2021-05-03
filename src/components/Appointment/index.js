@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import useVisualMode from 'hooks/useVisualMode';
 
 import Header from './Header';
@@ -31,6 +31,18 @@ export default function Appointment(props) {
   );
   const deleteConfirm = 'Are you sure you want to delete?';
 
+// side effect to transtion to correct mode with websocket implementation
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+      console.log('running useeffect ONE')
+      transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+      console.log('props.interview', props.interview)
+      transition(EMPTY);
+    }
+  }, [props.interview, transition, mode]);
+
 
   function save(name, interviewer) {
     let edit; //if mode is at EDIT, updateSpot does not change value of spots
@@ -51,7 +63,7 @@ export default function Appointment(props) {
     transition(DELETING, true);
 
     props.onDelete(props.id)
-      .then(res => transition(EMPTY))
+      .then(res => transition(SHOW))
       .catch(err => transition(ERROR_DELETE, true));
   }
 

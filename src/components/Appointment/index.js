@@ -29,7 +29,7 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  const deleteConfirm = 'Are you sure you want to delete?';
+  const deleteConfirm = 'Scheduler may experience crash when deleting appointments (Websocket implementation bug). Please refresh browser after deleting. Delete?';
 
 // side effect to transtion to correct mode with websocket implementation
   useEffect(() => {

@@ -77,7 +77,7 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && <Error message={'There was an issue with saving your appointment'} onClose={back} />}
       {mode === ERROR_DELETE && <Error message={'There was an issue with deleting your appointment'} onClose={back} />}
       {mode === CONFIRM && <Confirm onCancel={back} onConfirm={deleteAppointment} message={deleteConfirm} />}
-      { mode === SHOW && props.interview && (
+      {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}

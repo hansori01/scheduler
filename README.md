@@ -2,7 +2,7 @@
 
 Interview Scheduler is a SPA React application that allows users to book, edit and cancel interviews. This project focuses on React and Test Driven Development completed during my time at Lighthouse Lab's Full Stack program. Working with built in hooks, custom hooks and TDD were some of the highlights in this learning experience.
 
-[Demo Scheduler](https://eager-cray-64cadd.netlify.app/)
+[Scheduler - Demo](https://eager-cray-64cadd.netlify.app/)
 
 ## Project Stack
 
